@@ -4,8 +4,13 @@ from linkedlist import LinkedList
 
 def main():
     newlist = LinkedList()
-    print('List length {0}'.format(newlist.size()))
-    print('List is empty? {0}'.format(newlist.empty()))
-    
+    newlist.push_front(2)
+    newlist.push_front(5)
+    newlist.printList()
+    newlist.push_back(3);
+    newlist.printList()
+
+
+# This is here so that if this is run as a script from shell, it starts the correct functions    
 if __name__ == '__main__':
     main()
