@@ -1,6 +1,15 @@
 #!/usr/bin/env python3
 # Writing this for python 3
 
+class LLError(Exception):
+    """Exception raised by the linked list
+
+    Attributes:
+        message -- explanation the error
+    """
+    def __init__(self, message):
+        self.message = message
+    
 class LLNode:
     '''Class for Linked list node'''
     
@@ -68,3 +77,36 @@ class LinkedList:
             # Now we're at the end
             curNode.next = LLNode(value)
             self.length += 1
+
+    def insert(self, index, value):
+        """Inserts value @ index into the linked list and returns a Boolean
+        
+        Assumes that items in linked lists are zero-indexed.
+        index -- The index to insert into
+        value -- The value of the item
+        """
+        if index > self.length:
+            raise LLError('Index greater than the size of the list')
+        elif index < 0:
+            raise LLError('Index can not be negative')
+        elif index == 0:
+            self.push_front(value)
+            return True
+        elif index == self.length:
+            self.push_back(value)
+            return True
+        else: #Now we have an index in the middle of the list
+            startInd = 0
+            curNode = self.head
+            while startInd < index - 1:
+                startInd += 1
+                curNode = curNode.next
+
+            # Now the pointer points to the node right before the
+            # one we need to insert
+            newNode = LLNode(value)
+            newNode.next = curNode.next
+            curNode.next = newNode
+            self.length += 1
+            return True
+            
