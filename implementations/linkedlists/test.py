@@ -9,7 +9,9 @@ def main():
     newlist.printList()
     newlist.push_back(3)
     newlist.printList()
-    newlist.insert(-1, 6)
+    newlist.insert(1, 6)
+    newlist.printList()
+    newlist.reverse()
     newlist.printList()
 
 # This check is here to make sure that specific code can only

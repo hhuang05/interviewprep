@@ -110,3 +110,22 @@ class LinkedList:
             self.length += 1
             return True
             
+    def reverse(self):
+        """Reverse the linked list in place"""
+
+        stack = []
+        curNode = self.head
+        while curNode is not None:
+            stack.append(curNode)
+            curNode = curNode.next
+
+        counter = 0
+        self.head = stack.pop()
+        runner = self.head
+        while len(stack) > 0:
+            runner.next = stack.pop()
+            runner = runner.next #Update the runner
+
+        # Make sure that the last item's link is nulled out, otherwise
+        # will create cycles
+        runner.next = None 
