@@ -12,3 +12,11 @@ full(): Boolean
 empty() : Boolean
 
 """
+
+class Queue:
+
+    def __init__(self):
+        """ Creates an empty queue """
+        self.num_items = 0
+        self.the_queue = []
+        self.head
