@@ -32,19 +32,22 @@ def merge(A, p, q, r):
             A[k] = right_list[j]
             j += 1
 
-def mergesort(A, p, r):
+def mergesortHelp(A, p, r):
     if p < r:
         q = int((p + r) / 2)
         # print('Q is {}'.format(q))
-        mergesort(A, p, q)
-        mergesort(A, q+1, r)
+        mergesortHelp(A, p, q)
+        mergesortHelp(A, q+1, r)
         merge(A, p, q, r)
 
-    
+def mergesort(A):
+    """Performs merge sort on list A"""
+    mergesortHelp(A, 0, len(A)-1)
+        
 def main():
     a = [2,8,7,1,3,5,6,4]
     print(a)
-    mergesort(a, 0, len(a)-1)
+    mergesort(a)
     print(a)
 
 if __name__ == '__main__':
