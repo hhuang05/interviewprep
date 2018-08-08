@@ -56,13 +56,12 @@ class LinkedList:
         if self.length == 0:
             print('{ }')
         else:
-            str = '{ '
+            str = ''
             start = self.head
             while start is not None:
-                str += '{} '.format(start.key)
+                str += '{} -> '.format(start.key)
                 start = start.next
-            str += '}'
-            print(str)
+            print(str.rstrip("-> "))
 
     def push_back(self, value):
         if self.length == 0:
