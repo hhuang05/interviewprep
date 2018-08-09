@@ -2,27 +2,6 @@
 
 from linkedlist import LinkedList
 
-def ch2_4(llist, partition):
-    L = R = R_prime = llist.head    
-    while (R is not None):
-        if (R.key < partition):
-            if (L == R):
-                R_prime = R # Always remember the previous R location
-                R = R.next
-            else:
-                # Break edge from R_prime
-                R_prime.next = None
-                L_tmp = L.next
-                L.next = R
-                R_tmp = R.next
-                R.next = L_tmp
-                L = L.next
-                R = R_tmp
-                
-        else:
-            R_prime = R
-            R = R.next
-            
 
 def main():
     newlist = LinkedList()
