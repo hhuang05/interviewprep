@@ -1,5 +1,95 @@
-#! /usr/bin/python3
+#! /usr/bin/env python3
 
+from enum import Enum
+import numpy as np
+
+class ImageSide(Enum):
+    """ Different sides of image """
+    TOP = 0
+    RIGHT = 1
+    BOTTOM = 2
+    LEFT = 3
+
+def rotateImage(data, N):
+    """ Rotates a NxN image to the right by 90 degrees 
+
+    Function Signature
+       rotateImage :: ndarray -> int -> ()
+
+    """
+    if (N == 0 or N == 1):
+        return
+    else:    
+        target_coords = []
+        target_vals = []
+        source_vals = []
+        source_coords = []
+        has_moved = dict()
+        
+        for side_done in ImageSide:
+            # For the start we always have to build up the source coords
+            # However, for each subsequent one, we don't
+            if (side_done == ImageSide.TOP):
+                x_start = 0
+                pair = []
+                for y in range(N):
+                    pair.append(x_start)
+                    pair.append(y)
+                    source_val = data[x_start][y]
+                    source_vals.append(source_val)
+                    source_coords.append(pair)                 
+                    pair = []
+
+            # Now do transform on source coordinates based on
+            # the side
+            for s in source_coords:
+                key = str(s[0]) + str(s[1])
+
+                # If it already has been moved, skip it
+                if (has_moved.get(key) is not None):
+                    continue
+                else:
+                    has_moved[key] = s                    
+                    old_s0 = s[0]
+                    old_s1 = s[1]
+
+                    if (side_done == ImageSide.TOP): # Start on top side
+                        s[0] = s[1]
+                        s[1] = N-1
+                    elif (side_done == ImageSide.BOTTOM):
+                        s[0] = s[1]
+                        s[1] = 0
+                    else: #LEFT or RIGHT is fine
+                        y = s[1]
+                        s[1] = N-s[0]-1
+                        s[0] = y
+                        
+                    target_coords.append(s)
+                    target_val = data[s[0]][s[1]]
+                    target_vals.append(target_val)
+                    print("Source coord: ({},{}), Target coord ({},{})".format(
+                        old_s0, old_s1, s[0], s[1]))
+                    
+
+            # Write into target coordinates
+            for i in range(len(target_coords)):                    
+                coord = target_coords[i]                
+                print("Source value: {}, overwriting {}".format(
+                    source_vals[i], data[coord[0]][coord[1]]))
+                data[coord[0]][coord[1]] = source_vals[i]
+
+            # Now target_coords is the new source and we zero out the target
+            intermediate = target_coords
+            inter_vals = target_vals
+            target_coords = []
+            target_vals = []
+            source_coords = intermediate
+            source_vals = inter_vals
+    
+def test_rotateImage():
+    image = np.array([[0,1,2],[3,4,5],[6,7,8]])
+    rotateImage(image, 3)
+    
 def str_compress(s):
     """ Attempts to compress string s by reduce repeats to a count
 
@@ -114,7 +204,7 @@ def test_ispermutation():
     print('\'waterbottle\' is a permutation of \'erbottlewat\'? {}'.format(is_permutation('waterbottle', 'erbottlewat')))
     
 def main():    
-    test_strcompress()
+    test_rotateImage()
     
 if __name__ == '__main__':
     main()
