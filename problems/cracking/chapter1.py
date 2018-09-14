@@ -202,9 +202,38 @@ def is_permutation(s1, s2):
 
 def test_ispermutation():
     print('\'waterbottle\' is a permutation of \'erbottlewat\'? {}'.format(is_permutation('waterbottle', 'erbottlewat')))
+
+def is_permute_of_palindrome(the_string):
+    input_s = the_string.replace(' ', '') # take out all whitespaces
     
-def main():    
-    test_rotateImage()
+    if (len(input_s) == 0 or len(input_s) == 1):
+        return True
+    else:
+        char_count = dict()
+        for s in input_s:
+            if (char_count.get(s.lower()) is None):
+                char_count[s.lower()] = 1
+            else:
+                char_count[s.lower()] += 1
+
+	# Go over the dictionary
+        num_odds = 0
+        for k,v in char_count.items():
+            if (v % 2 != 0): # Count is odd
+                num_odds += 1
+            if num_odds > 1:
+                return False
+
+        return True
+
+def test_perm_palin():
+    s = 'race car'
+    print(s)
+    print(is_permute_of_palindrome(s))
+    
+def main():
+    test_perm_palin()
+    #test_rotateImage()
     
 if __name__ == '__main__':
     main()
