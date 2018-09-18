@@ -1,6 +1,24 @@
 #! /usr/bin/env python3
 
+def pairs_difference2(in_array, k):
+    if (len(in_array) <= 1):
+        return 0
 
+    if (type(k) is not int):
+        print('k must be integer')
+        return 0
+    else:
+        lookup = dict()
+        for i in in_array:
+            lookup[i] = i
+
+        num_pairs = 0
+        for j in in_array:
+            if (lookup.get(j+k) is not None):
+                num_pairs += 1
+            
+        return num_pairs
+    
 def pairs_difference(in_array, k):
     if (len(in_array) <= 1):
         return 0
@@ -30,17 +48,17 @@ def main():
     s = [1, 7, 5, 9, 2, 12, 3]
     k = 2
     print(s,k)
-    print(pairs_difference(s, k))
+    print(pairs_difference2(s, k))
 
     s = [1, 7, 5]
-    k = 3
+    k = 4
     print(s,k)
-    print(pairs_difference(s, k))
+    print(pairs_difference2(s, k))
 
     s = [2]
     k = 3
     print(s,k)
-    print(pairs_difference(s, k))
+    print(pairs_difference2(s, k))
 
 if __name__ == '__main__':
     main()
