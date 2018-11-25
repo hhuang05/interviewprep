@@ -10,12 +10,13 @@ class Term
 {
 
 public:
-	bool IsIsomorphic(Term *a, Term *b);
-	virtual std::vector<Term *> *getOperands() = 0;
+  bool IsIsomorphic(Term *a, Term *b);
 
-	// Prints each specific term to stdout
-	virtual void dump() = 0;
+  // Gets operands for those subclasses which have operands
+  virtual std::vector<Term *> *getOperands() = 0;
 
+  // Prints each specific term to stdout
+  virtual void dump() = 0;
 };
 
 #endif

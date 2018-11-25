@@ -2,6 +2,6 @@
 
 int main()
 {
-	Variable *v = new Variable("x");
-	v->dump();
+  Variable *v = new Variable("x");
+  v->dump();
 }

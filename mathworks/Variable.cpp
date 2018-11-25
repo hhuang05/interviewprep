@@ -2,7 +2,7 @@
 #include <iostream>
 
 Variable::Variable(std::string name) :
-	_name(name)
+  _name(name)
 {
 }
 
@@ -12,5 +12,5 @@ Variable::~Variable()
 
 void Variable::dump()
 {
-	std::cout << "Variable : " << _name << std::endl;
+  std::cout << "Variable : " << _name << std::endl;
 }
