@@ -7,7 +7,10 @@ variable:  Variable.cpp Variable.h
 consts :  ConstantExprs.cpp ConstantExprs.h
 	clang++ -std=c++11 -c -o ConstantExprs.o ConstantExprs.cpp
 
-deps: term variable consts
+funcapp : FunctionApp.h FunctionApp.cpp
+	clang++ -std=c++11 -c -o FunctionApp.o FunctionApp.cpp
+
+deps: term variable consts funcapp
 
 test: test.cpp
-	clang++ -std=c++11 -o a.out Variable.o Term.o ConstantExprs.o test.cpp
+	clang++ -std=c++11 -o a.out Variable.o Term.o ConstantExprs.o FunctionApp.o test.cpp

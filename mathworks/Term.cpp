@@ -1,7 +1,20 @@
+#include "FunctionApp.h"
 #include "ConstantExprs.h"
 #include "Variable.h"
 #include "Term.h"
 #include <iostream>
+
+#define TOLERANCE 0.0000001
+
+double RelDif(double a, double b)
+{
+  double c = Abs(a);
+  double d = Abs(b);
+
+  d = Max(c, d);
+
+  return d == 0.0 ? 0.0 : Abs(a - b) / d;
+}
 
 bool Term::IsIsomorphic(Term *a, Term *b)
 {
@@ -9,6 +22,26 @@ bool Term::IsIsomorphic(Term *a, Term *b)
     if (Variable *v2 = dynamic_cast<Variable*>(b)) {
       std::cout << "Both terms are variables" << std::endl;
       return true;
+    }
+    
+  } else if (Integer *i1 = dynamic_cast<Integer*>(a)) {
+    if (Integer *i2 = dynamic_cast<Integer*>(b)) {
+      if (i1->getInt() == i2->getInt()) {
+        std::cout << "Integers constants are same" << std::endl;
+        return true;
+      } else {
+        std::cout << "Integers are not the same" << std::endl;
+      }
+    }
+    
+  } else if (Float *f1 = dynamic_cast<Float*>(a)) {
+    if (Float *f2 = dynamic_cast<Float*>(b)) {
+      if (RelDif(f1->getFloat(), f2->getFloat()) <= TOLERANCE) {
+        std::cout << "Floating points constants are close enough" << std::endl;
+        return true;
+      } else {
+        std::cout << "Floating points are not close enough" << std::endl;
+      }
     }
     
   } else if (Operator *op1 = dynamic_cast<Operator*>(a)) {

@@ -1,9 +1,8 @@
 #include "ConstantExprs.h"
 #include <iostream>
 
-Operator::Operator(std::string op, std::vector<Term*> *operands) :
-  _op(op),
-  _operands(operands)
+Operator::Operator(std::string op) :
+  _op(op)
 {
 }
 
@@ -13,12 +12,7 @@ Operator::~Operator()
 
 void Operator::dump()
 {
-  std::cout << "+Operator: " << _op << std::endl;
-  for (std::vector<Term *>::const_iterator c_it = _operands->begin();
-       c_it != _operands->end(); ++c_it) {
-    std::cout << "|-";
-    (*c_it)->dump();
-  }
+  std::cout << "Operator: " << _op << std::endl;
 }
 
 Integer::Integer(int64_t integer) :

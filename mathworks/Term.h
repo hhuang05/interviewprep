@@ -3,6 +3,9 @@
 
 #include <vector>
 
+#define Abs(x)    ((x) < 0 ? -(x) : (x))
+#define Max(a, b) ((a) > (b) ? (a) : (b))
+
 /* Term: Abstract base class of all concrete terms
  * 
  */

@@ -1,3 +1,6 @@
+#ifndef CONSTANT_EXPR_H
+#define CONSTANT_EXPR_H
+
 #include "Term.h"
 #include <string>
 #include <cstdint>
@@ -15,12 +18,11 @@ class ConstantExpr : public Term
 class Operator : public ConstantExpr
 {
   std::string _op;
-  std::vector<Term*> *_operands;
   
  public:
-  Operator(std::string op, std::vector<Term*> *operands);
+  Operator(std::string op);
   ~Operator();
-  std::vector<Term *> *getOperands() {return _operands;};
+  std::vector<Term *> *getOperands() {return nullptr;};
   std::string getOp() {return _op;};
   bool isOperator() {return true;};
   bool isInteger() {return false;};
@@ -39,6 +41,8 @@ class Integer : public Numeric
  public:
   Integer(int64_t integer);
   ~Integer();
+  std::vector<Term *> *getOperands() {return nullptr;};
+  int64_t getInt() {return _internalVal;};
   bool isOperator() {return false;};
   bool isInteger() {return true;};
   bool isFloat() {return false;};
@@ -52,8 +56,12 @@ class Float : public Numeric
  public:
   Float(double num);
   ~Float();
+  std::vector<Term *> *getOperands() {return nullptr;};
+  double getFloat() {return _num;};
   bool isOperator() {return false;};
   bool isInteger() {return false;};
   bool isFloat() {return true;};
   void dump();
 };
+
+#endif
