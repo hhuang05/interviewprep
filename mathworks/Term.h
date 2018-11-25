@@ -1,5 +1,5 @@
-#ifndef TERMS_H
-#define TERMS_H
+#ifndef TERM_H
+#define TERM_H
 
 #include <vector>
 
@@ -10,7 +10,7 @@ class Term
 {
 
 public:
-  bool IsIsomorphic(Term *a, Term *b);
+  static bool IsIsomorphic(Term *a, Term *b);
 
   // Gets operands for those subclasses which have operands
   virtual std::vector<Term *> *getOperands() = 0;

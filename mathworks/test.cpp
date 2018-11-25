@@ -1,7 +1,11 @@
 #include "Variable.h"
+#include "Term.h"
 
 int main()
 {
-  Variable *v = new Variable("x");
-  v->dump();
+  Variable *x1 = new Variable("x");
+  Variable *y1 = new Variable("y");
+  x1->dump();
+
+  Term::IsIsomorphic(x1, y1);
 }
