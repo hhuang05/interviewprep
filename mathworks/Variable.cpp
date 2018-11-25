@@ -6,12 +6,11 @@ Variable::Variable(std::string name) :
 {
 }
 
-~Variable::Variable()
+Variable::~Variable()
 {
-	delete _name;
 }
 
-Variable::dump()
+void Variable::dump()
 {
 	std::cout << "Variable : " << _name << std::endl;
 }

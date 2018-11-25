@@ -11,10 +11,10 @@ class Term
 
 public:
 	bool IsIsomorphic(Term *a, Term *b);
-	std::vector<Term *> *getOperands();
+	virtual std::vector<Term *> *getOperands() = 0;
 
 	// Prints each specific term to stdout
-	void dump() = 0;
+	virtual void dump() = 0;
 
 };
 
