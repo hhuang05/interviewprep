@@ -1,0 +1,22 @@
+To run:
+=======
+
+1. Download IRTest.tgz into an empty directory
+
+2. Unzip the file:
+
+         tar -czf IRTest.tgz *
+
+3. Compile (Tested on g++ 7.2):
+
+        make
+
+4. Run the file which generates some debug output and a set of final test result 
+
+       ./IRTest
+
+Assumptions:
+=============
+
+For this problem, I assume that there would be a front end which
+parses the IR into the proper form as specified by my C++ class files. 
