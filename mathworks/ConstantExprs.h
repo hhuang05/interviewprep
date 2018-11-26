@@ -5,15 +5,14 @@
 #include <string>
 #include <cstdint>
 
+/* ConstantExpr - This abstract base class defines all the constant exprs
+ * which includes predeined operators and numerics 
+ */
 class ConstantExpr : public Term
 {
- public :
-  virtual bool isOperator() = 0;
-  virtual bool isInteger() = 0; 
-  virtual bool isFloat() = 0;
 };
 
-/* Operators
+/* Operators - Predefined operators in the IR language
  */
 class Operator : public ConstantExpr
 {
@@ -22,10 +21,7 @@ class Operator : public ConstantExpr
  public:
   Operator(std::string op);
   ~Operator();
-  std::string getOp() {return _op;};
-  bool isOperator() {return true;};
-  bool isInteger() {return false;};
-  bool isFloat() {return false;};
+  std::string getOp();
   void dump(std::string prefix="");
 };
 
@@ -40,10 +36,7 @@ class Integer : public Numeric
  public:
   Integer(int64_t integer);
   ~Integer();
-  int64_t getInt() {return _internalVal;};
-  bool isOperator() {return false;};
-  bool isInteger() {return true;};
-  bool isFloat() {return false;};
+  int64_t getInt();
   void dump(std::string prefix="");
 };
 
@@ -54,10 +47,7 @@ class Float : public Numeric
  public:
   Float(double num);
   ~Float();
-  double getFloat() {return _num;};
-  bool isOperator() {return false;};
-  bool isInteger() {return false;};
-  bool isFloat() {return true;};
+  double getFloat();
   void dump(std::string prefix="");
 };
 

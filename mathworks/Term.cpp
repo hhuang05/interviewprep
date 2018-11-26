@@ -10,7 +10,11 @@
 
 #define TOLERANCE 0.0000001
 
-
+/* RelDif 
+ * 
+ * Checks to see if two floating points 
+ * numbers are close enough according to a tolerance
+ */
 double RelDif(double a, double b)
 {
   double c = Abs(a);

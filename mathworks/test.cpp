@@ -93,6 +93,14 @@ bool test_Floats()
   return Term::IsIsomorphic(v1, v2);
 }
 
+bool test_Floats_Fail()
+{
+  Float *v1 = new Float(1.00);
+  Float *v2 = new Float(1.01);
+
+  return Term::IsIsomorphic(v1, v2);
+}
+
 bool test_FunctionApp()
 {
   Variable *v1 = new Variable("x");
@@ -172,6 +180,7 @@ int main()
 {
   bool variables = test_Variables();
   bool floats = test_Floats();
+  bool floats_fail = test_Floats_Fail();
   bool funcApp = test_FunctionApp();
   bool funcDef = test_FunctionDef();
   bool varIsIsomorphic = test_IsomorphicPass();
@@ -180,6 +189,7 @@ int main()
   std::cout << "Test Results         | Expected | Actual " << std::endl;
   std::cout << "test_Variables       | 1        | " << variables << "      " << std::endl;
   std::cout << "test_Floats          | 1        | " << floats << "      " << std::endl;
+  std::cout << "test_Floats_Fail     | 0        | " << floats_fail << "      " << std::endl;
   std::cout << "test_FuncApp         | 1        | " << funcApp << "      " << std::endl;
   std::cout << "test_FuncDef         | 1        | " << funcDef << "      " << std::endl;
   std::cout << "test_IsIsomorphic    | 1        | " << varIsIsomorphic << "      " << std::endl;
