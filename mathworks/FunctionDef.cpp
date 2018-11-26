@@ -13,14 +13,14 @@ FunctionDef::~FunctionDef()
 void FunctionDef::dump(std::string prefix)
 {
   // Dump out the list of variables
-  std::cout << "+FunctionDef" << std::endl;
+  std::cout << prefix << "+FunctionDef" << std::endl;
   
   for (std::vector<Variable*>::const_iterator var_it = _vars->begin();
        var_it != _vars->end(); ++var_it) {
-    (*var_it)->dump(prefix);
+    (*var_it)->dump(prefix + "|-");
   }
   
   // Then dump out the term
-  _term->dump(prefix);  
+  _term->dump(prefix + "|-");  
 }
 

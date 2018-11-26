@@ -19,3 +19,6 @@ level2: funcapp funcdef
 
 test: test.cpp
 	clang++ -g -std=c++11 -o a.out Variable.o Term.o ConstantExprs.o FunctionApp.o FunctionDef.o test.cpp
+
+clean:
+	rm *.o

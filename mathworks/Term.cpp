@@ -133,6 +133,10 @@ bool Term::IsIsomorphic(Term *a, Term *b, VariableMap *varMap)
         // variables in the term
         if (Term::IsIsomorphic(fndef1->getTerm(), fndef2->getTerm(), localMap)) {
           std::cout << "Function definitions isomorphic" << std::endl;
+          return true;
+          
+        } else {
+          std::cout << "Function definitions not isomorphic" << std::endl;
         }
         
       } else {

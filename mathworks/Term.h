@@ -21,7 +21,7 @@ public:
                            VariableMap *varMap=nullptr);
 
   // Prints each specific term to stdout
-  virtual void dump(std::string prefix) = 0;
+  virtual void dump(std::string prefix="") = 0;
 };
 
 #endif
