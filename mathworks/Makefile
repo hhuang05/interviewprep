@@ -1,3 +1,5 @@
+all: 	level1 level2 test
+
 term: Term.cpp
 	clang++ -g -std=c++11 -c -o Term.o Term.cpp
 
@@ -21,4 +23,4 @@ test: IRTest.cpp
 	clang++ -g -std=c++11 -o IRTest Variable.o Term.o ConstantExprs.o FunctionApp.o FunctionDef.o IRTest.cpp
 
 clean:
-	rm *.o
+	rm *.o IRTest
