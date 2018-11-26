@@ -248,7 +248,8 @@ int main()
   bool varOrderResult = test_VarOrderChanged();
   
   std::cout << "==========================================" << std::endl;
-  std::cout << "Test Results         | Expected | Actual " << std::endl;
+  std::cout << "TEST RESULTS         | Expected | Actual " << std::endl;
+  std::cout << "==========================================" << std::endl;
   std::cout << "test_Variables       | 1        | " << variables << "      " << std::endl;
   std::cout << "test_Integers        | 1        | " << integers << "      " << std::endl;
   std::cout << "test_Integers_Fail   | 0        | " << integers_fail << "      " << std::endl;
@@ -260,5 +261,6 @@ int main()
   std::cout << "test_FuncDef         | 1        | " << funcDef << "      " << std::endl;
   std::cout << "test_IsIsomorphic    | 1        | " << varIsIsomorphic << "      " << std::endl;
   std::cout << "test_VarOrderChanged | 0        | " << varOrderResult << "      " << std::endl;
-  
+  std::cout << "==========================================" << std::endl;
+
 }
