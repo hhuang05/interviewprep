@@ -22,12 +22,11 @@ class Operator : public ConstantExpr
  public:
   Operator(std::string op);
   ~Operator();
-  std::vector<Term *> *getOperands() {return nullptr;};
   std::string getOp() {return _op;};
   bool isOperator() {return true;};
   bool isInteger() {return false;};
   bool isFloat() {return false;};
-  void dump();
+  void dump(std::string prefix="");
 };
 
 class Numeric : public ConstantExpr
@@ -41,12 +40,11 @@ class Integer : public Numeric
  public:
   Integer(int64_t integer);
   ~Integer();
-  std::vector<Term *> *getOperands() {return nullptr;};
   int64_t getInt() {return _internalVal;};
   bool isOperator() {return false;};
   bool isInteger() {return true;};
   bool isFloat() {return false;};
-  void dump();
+  void dump(std::string prefix="");
 };
 
 class Float : public Numeric
@@ -56,12 +54,11 @@ class Float : public Numeric
  public:
   Float(double num);
   ~Float();
-  std::vector<Term *> *getOperands() {return nullptr;};
   double getFloat() {return _num;};
   bool isOperator() {return false;};
   bool isInteger() {return false;};
   bool isFloat() {return true;};
-  void dump();
+  void dump(std::string prefix="");
 };
 
 #endif

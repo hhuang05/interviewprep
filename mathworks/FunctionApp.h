@@ -17,7 +17,7 @@ class FunctionApp : public Term
   ~FunctionApp();
   std::vector<Term *> *getOperands() {return _operands;};
   Term *getOp() {return _op;};
-  void dump();
+  void dump(std::string prefix="");
 };
 
 #endif

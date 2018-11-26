@@ -10,7 +10,7 @@ Variable::~Variable()
 {
 }
 
-void Variable::dump()
+void Variable::dump(std::string prefix)
 {
-  std::cout << "Variable : " << _name << std::endl;
+  std::cout << prefix << "Variable: " << _name << std::endl;
 }

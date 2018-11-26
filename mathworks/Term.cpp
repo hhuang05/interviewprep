@@ -1,10 +1,15 @@
+#include "FunctionDef.h"
 #include "FunctionApp.h"
 #include "ConstantExprs.h"
 #include "Variable.h"
 #include "Term.h"
+
 #include <iostream>
+#include <map>
+#include <utility>
 
 #define TOLERANCE 0.0000001
+
 
 double RelDif(double a, double b)
 {
@@ -16,12 +21,30 @@ double RelDif(double a, double b)
   return d == 0.0 ? 0.0 : Abs(a - b) / d;
 }
 
-bool Term::IsIsomorphic(Term *a, Term *b)
+bool Term::IsIsomorphic(Term *a, Term *b, VariableMap *varMap)
 {
   if (Variable *v1 = dynamic_cast<Variable*>(a)) {
     if (Variable *v2 = dynamic_cast<Variable*>(b)) {
-      std::cout << "Both terms are variables" << std::endl;
-      return true;
+
+      if (varMap != nullptr) {
+        auto map_it = varMap->find(v1->getName());
+        if (map_it == varMap->end()) {
+          std::cout << "Variable not defined" << std::endl;
+          return false;
+        } else if ((*map_it).second.compare(v2->getName()) != 0) {
+          std::cout << "Expecting variables ("<< v1->getName() << ","
+                    << (*map_it).second << ")" << std::endl;
+          std::cout << " but got ("<< v1->getName() << ","
+                    << v2->getName() << ")" << std::endl;
+          return false;
+        } else {
+          std::cout << "Variables match in order" << std::endl;
+          return true;
+        }
+      } else {
+        std::cout << "Both terms are variables" << std::endl;
+        return true;
+      }
     }
     
   } else if (Integer *i1 = dynamic_cast<Integer*>(a)) {
@@ -46,10 +69,20 @@ bool Term::IsIsomorphic(Term *a, Term *b)
     
   } else if (Operator *op1 = dynamic_cast<Operator*>(a)) {
     if (Operator *op2 = dynamic_cast<Operator*>(b)) {
-      // We first check the operators, then check operands
       if (op1->getOp().compare(op2->getOp()) == 0) {
-        auto op1_operands = op1->getOperands();
-        auto op2_operands = op2->getOperands();
+        std::cout << "Operators are isomorphic" << std::endl;
+        return true;
+      } else {
+        std::cout << "Operators not the same" << std::endl;
+      }
+    }
+    
+  } else if (FunctionApp *fn1 = dynamic_cast<FunctionApp*>(a)) {
+    if (FunctionApp *fn2 = dynamic_cast<FunctionApp*>(b)) {
+      // We first check the operators, then check operands
+      if (Term::IsIsomorphic(fn1->getOp(), fn2->getOp(), varMap)) {
+        auto op1_operands = fn1->getOperands();
+        auto op2_operands = fn2->getOperands();
 
         // if we have the same number of operands
         if (op1_operands->size() == op2_operands->size()) {
@@ -59,27 +92,54 @@ bool Term::IsIsomorphic(Term *a, Term *b)
           while (operand1_it != op1_operands->end() &&
                  operand2_it != op2_operands->end()) {
 
-            if (Term::IsIsomorphic(*operand1_it, *operand2_it)) {
+            if (Term::IsIsomorphic(*operand1_it, *operand2_it, varMap)) {
               ++operand1_it;
               ++operand2_it;
             } else {
+              std::cout << "Function applications are not isomorphic" << std::endl;
               return false;
             }
           }
 
-          std::cout << "Operators are isomorphic" << std::endl;
+          std::cout << "Function applications are isomorphic" << std::endl;
           return true;
                  
         } else {
           std::cout << "Number of operands different" << std::endl;
         }
+      } 
+    }
+  } else if (FunctionDef *fndef1 = dynamic_cast<FunctionDef*>(a)) {
+    if (FunctionDef *fndef2 = dynamic_cast<FunctionDef*>(b)) {
+      if (fndef1->getVariables()->size() == fndef2->getVariables()->size()) {
+        // First create a map of the variables from one funcdef to the other
+        VariableMap *localMap = new VariableMap();
+
+        auto fndef1Var_it = fndef1->getVariables()->begin();
+        auto fndef2Var_it = fndef2->getVariables()->begin();
+
+        while (fndef1Var_it != fndef1->getVariables()->end() &&
+               fndef2Var_it != fndef2->getVariables()->end()) {
+          
+          localMap->insert(make_pair((*fndef1Var_it)->getName(),
+                                   (*fndef2Var_it)->getName()));
+          
+          ++fndef1Var_it;
+          ++fndef2Var_it;
+        }
+
+        // Now map is created, we now compare the terms but use
+        // the map as a verifier for the order of the bound
+        // variables in the term
+        if (Term::IsIsomorphic(fndef1->getTerm(), fndef2->getTerm(), localMap)) {
+          std::cout << "Function definitions isomorphic" << std::endl;
+        }
         
       } else {
-        std::cout << "Operators not the same" << std::endl;
+        std::cout << "Number of variables different" << std::endl;
       }
     }
-  }
-  else {
+  } else {
     std::cout << "Both terms are not the same" << std::endl;
   }
   

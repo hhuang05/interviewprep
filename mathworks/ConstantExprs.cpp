@@ -10,9 +10,9 @@ Operator::~Operator()
 {
 }
 
-void Operator::dump()
+void Operator::dump(std::string prefix)
 {
-  std::cout << "Operator: " << _op << std::endl;
+  std::cout << prefix << "Operator: " << _op << std::endl;
 }
 
 Integer::Integer(int64_t integer) :
@@ -24,9 +24,9 @@ Integer::~Integer()
 {
 }
 
-void Integer::dump()
+void Integer::dump(std::string prefix)
 {
-  std::cout << "Integer: " << _internalVal << std::endl;
+  std::cout << prefix << "Integer: " << _internalVal << std::endl;
 }
 
 Float::Float(double num) :
@@ -38,7 +38,7 @@ Float::~Float()
 {
 }
 
-void Float::dump()
+void Float::dump(std::string prefix)
 {
-  std::cout << "Float: " << _num << std::endl; 
+  std::cout << prefix << "Float: " << _num << std::endl; 
 }

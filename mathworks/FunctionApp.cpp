@@ -10,14 +10,13 @@ FunctionApp::~FunctionApp()
 {
 }
 
-void FunctionApp::dump()
+void FunctionApp::dump(std::string prefix)
 {
-  std::cout << "+FunctionApp" << std::endl;
-  std::cout << "|-";
-  _op->dump();
+  std::cout << prefix << "+FunctionApp" << std::endl;
+  _op->dump(prefix + "|-");
+  
   for (std::vector<Term *>::const_iterator c_it = _operands->begin();
-       c_it != _operands->end(); ++c_it) {
-    std::cout << "|-";
-    (*c_it)->dump();
+       c_it != _operands->end(); ++c_it) {  
+    (*c_it)->dump(prefix + "|-");
   }
 }

@@ -11,8 +11,7 @@ class Variable : public Term
   Variable(std::string name);
   ~Variable();
 
-  std::vector<Term *> *getOperands() {return nullptr;};
-  void dump();
+  void dump(std::string prefix="");
 
   std::string getName() {return _name;};
 };
