@@ -7,6 +7,11 @@
 #include <string>
 #include <vector>
 
+/* Function Applications in the IR language
+ *
+ * (<term> <term>*)
+ * Example: (+ a b)
+ */ 
 class FunctionApp : public Term
 {
   Term *_op;
@@ -15,8 +20,9 @@ class FunctionApp : public Term
  public:
   FunctionApp(Term *op, std::vector<Term*> *operands);
   ~FunctionApp();
-  std::vector<Term *> *getOperands() {return _operands;};
-  Term *getOp() {return _op;};
+  
+  std::vector<Term *> *getOperands();
+  Term *getOp();
   void dump(std::string prefix="");
 };
 

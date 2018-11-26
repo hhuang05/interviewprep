@@ -10,6 +10,16 @@ FunctionApp::~FunctionApp()
 {
 }
 
+std::vector<Term *> *FunctionApp::getOperands()
+{
+  return _operands;
+}
+
+Term *FunctionApp::getOp()
+{
+  return _op;
+}
+
 void FunctionApp::dump(std::string prefix)
 {
   std::cout << prefix << "+FunctionApp" << std::endl;

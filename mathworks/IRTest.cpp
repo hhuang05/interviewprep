@@ -53,7 +53,7 @@ Term *getSecondTerm(std::string var1, std::string var2)
   return fndef2;
 }
 
-/* getSecondTermFlip - Gets the second term but replacing variable order
+/* getSecondTermFlip - Gets the first term by replacing variable names
  * 
  */
 Term *getSecondTermFlip(std::string var1, std::string var2)
@@ -140,11 +140,6 @@ bool test_IsomorphicPass()
 
   Term *g_term = getFirstTerm("g");  
   Term *ab_term = getSecondTerm("a", "b");
-
-  f_term->dump();
-  g_term->dump();
-  bool firstTermR = Term::IsIsomorphic(f_term, g_term);
-  std::cout << "First :" << firstTermR << std::endl;
   
   std::vector<Term*> ops1 {xy_term};
   std::vector<Term*> ops2 {ab_term};
@@ -152,7 +147,7 @@ bool test_IsomorphicPass()
   FunctionApp *newFn1 = new FunctionApp(f_term, &ops1);
   FunctionApp *newFn2 = new FunctionApp(g_term, &ops2);
   
-  return firstTermR;
+  return Term::IsIsomorphic(newFn1, newFn2);
 }
 
 // Expect to NOT be isomorphic since order of variables changed
@@ -186,6 +181,7 @@ int main()
   bool varIsIsomorphic = test_IsomorphicPass();
   bool varOrderResult = test_VarOrderChanged();
   
+  std::cout << "==========================================" << std::endl;
   std::cout << "Test Results         | Expected | Actual " << std::endl;
   std::cout << "test_Variables       | 1        | " << variables << "      " << std::endl;
   std::cout << "test_Floats          | 1        | " << floats << "      " << std::endl;

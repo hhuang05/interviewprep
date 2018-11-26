@@ -11,13 +11,13 @@
 
 typedef std::map<std::string, std::string> VariableMap;
 
-/* Term: Abstract base class of all concrete terms
- * 
+/* Abstract base class of all concrete terms
  */
 class Term
 {
 
 public:
+  
   /** 
    * Checks to see if two Terms are isomorphic by recursively
    * checking substructures.  

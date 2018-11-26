@@ -14,10 +14,10 @@ class Variable : public Term
   
   Variable(std::string name);
   ~Variable();
-
+  
+  std::string getName();
   void dump(std::string prefix="");
   
-  std::string getName() {return _name;};
 };
 
 #endif

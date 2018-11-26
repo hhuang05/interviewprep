@@ -17,8 +17,8 @@ level1: term variable consts
 
 level2: funcapp funcdef
 
-test: test.cpp
-	clang++ -g -std=c++11 -o a.out Variable.o Term.o ConstantExprs.o FunctionApp.o FunctionDef.o test.cpp
+test: IRTest.cpp
+	clang++ -g -std=c++11 -o IRTest Variable.o Term.o ConstantExprs.o FunctionApp.o FunctionDef.o IRTest.cpp
 
 clean:
 	rm *.o

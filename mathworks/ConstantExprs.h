@@ -5,14 +5,14 @@
 #include <string>
 #include <cstdint>
 
-/* ConstantExpr - This abstract base class defines all the constant exprs
+/* This abstract base class defines all the constant exprs
  * which includes predeined operators and numerics 
  */
 class ConstantExpr : public Term
 {
 };
 
-/* Operators - Predefined operators in the IR language
+/* Predefined operators in the IR language
  */
 class Operator : public ConstantExpr
 {
@@ -25,10 +25,15 @@ class Operator : public ConstantExpr
   void dump(std::string prefix="");
 };
 
+/* Numerics in the IR language which includes Integers
+ * and floats. For the sake of organization this was included.
+ */
 class Numeric : public ConstantExpr
 {
 };
 
+/* Integers in the IR language
+ */ 
 class Integer : public Numeric
 {
   int64_t _internalVal;
@@ -40,6 +45,8 @@ class Integer : public Numeric
   void dump(std::string prefix="");
 };
 
+/* Flating point numbers in the IR language
+ */ 
 class Float : public Numeric
 {
   double _num;

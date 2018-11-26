@@ -10,6 +10,16 @@ FunctionDef::~FunctionDef()
 {
 }
 
+std::vector<Variable*> *FunctionDef::getVariables()
+{
+  return _vars;
+}
+
+Term *FunctionDef::getTerm()
+{
+  return _term;
+}
+
 void FunctionDef::dump(std::string prefix)
 {
   // Dump out the list of variables
