@@ -38,7 +38,7 @@ def main():
     # print(seq)
     # print('Largest sum is: {}'.format(largest_sum(seq)))
 
-    seq = [5, -1,  8, -15, 9, -4, 8] 
+    seq = [5, -1,  8, -15, 9, -4, 6] 
     print(seq)
     print('Largest sum is: {}'.format(largest_sum(seq)))
 
