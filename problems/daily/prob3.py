@@ -30,15 +30,45 @@ def serialize(root):
             return template.format(root.val, serialize(root.left), '')
         else:
             return template.format(root.val, '', '')
-            
 
-
+# Invariant is that at the end of deserialize, that the root node should be
+# on the process stack
 def deserialize(s):
-    return Node(s)
+    process_stack = []
+    cur_node_val = ''
+    for c in s:
+        if c == '(':
+            continue
+        
+        elif c == ')':
+            rightNode = Node(cur_node_val)
+            cur_node_val = ''
+            leftNode = process_stack.pop()
+            rootNode = process_stack.pop()
+            rootNode.left = leftNode
+            rootNode.right = rightNode
+            process_stack.append(rootNode)
+
+        elif c == ',':
+            newNode = Node(cur_node_val)
+            cur_node_val = ''
+            process_stack.append(newNode)
+            
+        else:
+            cur_node_val += c
+
+    if len(process_stack) == 1:
+        return process_stack.pop()
+
+    print(process_stack)
+    
+    return None
 
 def main():
     tree = Node('root', Node('left', Node('left.left')), Node('right'))
-    print(serialize(tree))
+    serializedTree = serialize(tree)
+    testTree = '(root,(left,(left.left,,),),(right,,))'
+    print(deserialize(testTree))
 
 if __name__ == '__main__':
     main()
